@@ -1,4 +1,4 @@
-def call(String context, String message, String state) {
+void setBuildStatus(String context, String message, String state) {
   // partially hard coded URL because of https://issues.jenkins-ci.org/browse/JENKINS-36961, adjust to your own GitHub instance
   step([
       $class: "GitHubCommitStatusSetter",
