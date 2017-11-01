@@ -3,4 +3,5 @@ def call() {
   env.GIT_COMMIT_SHORT = env.GIT_COMMIT.take(6)
   env.GIT_BRANCH = getGitBranch()
   env.GIT_REMOTE_ORIGIN = getGitRemoteOrigin()
+  env.GIT_CHANGED_FILES = getGitChangedFiles()
 }
