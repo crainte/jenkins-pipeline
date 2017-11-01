@@ -1,6 +1,6 @@
-def call(String context, String message, String state) {
-    import groovy.json.JsonOutput
+import groovy.json.JsonOutput
 
+def call(String context, String message, String state) {
     display = context.replaceAll(" ", "-")
     fullcontext = "continuous-integration/jenkins/${display}"
 
