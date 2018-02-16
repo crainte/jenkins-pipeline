@@ -1,8 +1,8 @@
 import groovy.json.JsonOutput
 
 def call(String context, String message, String state) {
-    display = context.replaceAll(" ", "-")
-    fullcontext = "continuous-integration/jenkins/${display}"
+    def display = context.replaceAll(" ", "-")
+    def fullcontext = "continuous-integration/jenkins/${display}"
 
     withCredentials([[$class: 'StringBinding', credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN']]) {
         def payload = JsonOutput.toJson(["state": "${state}", "description":"${message}", "context": "${fullcontext}", "target_url": "${env.BUILD_URL}display/redirect"])
