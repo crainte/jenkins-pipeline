@@ -1,6 +1,6 @@
 import groovy.json.JsonOutput
 
-def call(String ref, String target, String description=null) {
+def call(String ref, String target, String owner, String repo, String description=null) {
     withCredentials([[$class: 'StringBinding', credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN']]) {
         def message
 
@@ -11,7 +11,7 @@ def call(String ref, String target, String description=null) {
         }
 
         def payload = JsonOutput.toJson(["ref": "${ref}", "environment": "${target}", "auto_merge": "false", "description": "${message}"])
-        def apiURL = "${env.GITHUB_API}/repos/${env.GIT_REMOTE_ORIGIN}/deployments"
+        def apiURL = "${env.GITHUB_API}/repos/${owner}/${repo}/deployments"
 
         // Create new Deployment using the GitHub Deployment API 
         def response = httpRequest  customHeaders: [[name: 'Authorization', value: "Token ${env.GITHUB_TOKEN}"]], httpMode: 'POST', requestBody: payload, responseHandle: 'STRING', url: apiURL
