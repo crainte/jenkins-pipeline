@@ -1,6 +1,6 @@
 import groovy.json.JsonOutput
 
-def call(String id, String status, String owner, String repo) {
+def call(Integer id, Integer status, String owner, String repo) {
     withCredentials([[$class: 'StringBinding', credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN']]) {
 
         // Record new Deployment Status based on output
