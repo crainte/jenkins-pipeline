@@ -10,7 +10,7 @@ def call(String ref, String target, String owner, String repo, String descriptio
             message = "Deploying ${ref} to ${target}"
         }
 
-        def payload = JsonOutput.toJson(["ref": "${ref}", "environment": "${target}", "auto_merge": "false", "description": "${message}"])
+        def payload = JsonOutput.toJson(["ref": "${ref}", "environment": "${target}", "auto_merge": false, "description": "${message}"])
         def apiURL = "${env.GITHUB_API}/repos/${owner}/${repo}/deployments"
 
         // Create new Deployment using the GitHub Deployment API 
