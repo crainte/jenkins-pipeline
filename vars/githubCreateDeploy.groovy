@@ -3,6 +3,7 @@ import groovy.json.JsonOutput
 def call(String ref, String target, String owner, String repo, String description=null) {
     withCredentials([[$class: 'StringBinding', credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN']]) {
         def message
+        def id
 
         if( description ) {
             message = description
@@ -21,11 +22,10 @@ def call(String ref, String target, String owner, String repo, String descriptio
 
         // Get the ID of the GitHub Deployment just created
         def responseJson = readJSON text: response.content
-        def id = responseJson.id
+        id = responseJson.id
         if(id == "") {
             error("Could not extract id from Deployment response")
         }
-
-        return id
     }
+    return id
 }
