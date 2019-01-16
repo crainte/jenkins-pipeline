@@ -1,9 +1,9 @@
 import groovy.json.JsonOutput
 
 def call(String ref, String target, String owner, String repo, String description=null) {
+    def id
     withCredentials([[$class: 'StringBinding', credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN']]) {
         def message
-        def id
 
         if( description ) {
             message = description
